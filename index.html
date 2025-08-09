@@ -3,418 +3,647 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Revisão-AV2-Geografia-2º-Trimestre</title>
+<title>Revisão - Quiz de Inglês com resumo final</title>
+
+<!-- Fonte Inter e FontAwesome -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
 <style>
-  body {
-    margin: 0;
-    background-color: #fff;
-    font-family: "Georgia", serif;
-    color: #222;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 10px 60px;
-    min-height: 100vh;
+  *, *::before, *::after {
+    box-sizing: border-box;
   }
-  #app {
-    width: 700px;
-    max-width: 95vw;
-    border: 1px solid #444;
-    border-radius: 8px;
-    padding: 30px 40px 40px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    background-color: #fafafa;
-  }
-  h1 {
-    text-align: center;
-    font-size: 2.4rem;
-    font-weight: normal;
-    margin-bottom: 40px;
-    letter-spacing: 2px;
-  }
-  button {
-    display: block;
-    margin: 30px auto 0;
-    background-color: #222;
-    color: #fff;
-    font-weight: 600;
-    border: none;
-    padding: 12px 28px;
-    font-size: 1.1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  button:hover:not(:disabled) {
-    background-color: #555;
-  }
-  button:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
+  body, h2, h3, p, button, label, ul, li {
+    margin: 0; padding: 0;
+    font-family: 'Inter', sans-serif;
   }
 
-  .question {
-    font-size: 1.3rem;
-    font-weight: 600;
-    margin-bottom: 25px;
-    line-height: 1.3;
-    white-space: pre-line;
+  body {
+    background: #121212;
+    color: #eee;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 60px 15px 90px;
   }
-  .alternatives {
-    margin-bottom: 25px;
-    padding-left: 20px;
+
+  #revisao {
+    position: relative;
+    max-width: 700px;
+    width: 100%;
+    background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);
+    background-size: 300% 300%;
+    animation: gradientMove 12s ease infinite;
+    border-radius: 16px;
+    padding: 24px 32px;
+    box-shadow: 0 12px 45px rgb(33 67 95 / 0.7);
+    color: #f0f0f0;
+    overflow: auto;
+    max-height: 90vh;
+    transition: background-color 0.6s ease, color 0.6s ease;
   }
-  .alternatives label {
+
+  #revisao::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(2px 2px at 10% 20%, rgba(255 255 255 / 0.8), transparent),
+      radial-gradient(1.5px 1.5px at 30% 80%, rgba(255 255 255 / 0.6), transparent),
+      radial-gradient(1.7px 1.7px at 50% 30%, rgba(255 255 255 / 0.7), transparent),
+      radial-gradient(1.2px 1.2px at 70% 70%, rgba(255 255 255 / 0.5), transparent),
+      radial-gradient(2.5px 2.5px at 85% 40%, rgba(255 255 255 / 0.9), transparent);
+    animation: twinkle 6s infinite ease-in-out;
+    z-index: 0;
+  }
+
+  #revisao > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 1.2rem;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #aab8ff;
+  }
+
+  h2 i {
+    font-size: 1.8rem;
+  }
+
+  .pergunta-container {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    min-height: 4.5rem;
+  }
+
+  form.alternatives {
+    margin-bottom: 1.5rem;
+  }
+  label.alt-label {
     display: block;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
     font-size: 1.1rem;
     cursor: pointer;
     user-select: none;
+    padding: 10px 18px;
+    border-radius: 12px;
+    background: rgba(70, 70, 110, 0.3);
+    border: 2px solid transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  label.alt-label:hover,
+  label.alt-label:focus-within {
+    background: rgba(100, 100, 160, 0.6);
+    border-color: #556bffcc;
+    outline: none;
   }
   input[type="radio"] {
-    margin-right: 10px;
+    margin-right: 12px;
     cursor: pointer;
+    accent-color: #556bff;
   }
-  #resposta {
-    font-size: 1.3rem;
+
+  .feedback {
+    font-size: 1.15rem;
     font-weight: 700;
     min-height: 2rem;
-    color: #222;
-    text-align: center;
-    margin-bottom: 20px;
-    height: 28px;
+    margin-bottom: 1rem;
+    user-select: none;
   }
-  #pontuacao {
-    font-size: 1.8rem;
-    font-weight: 700;
-    text-align: center;
-    margin-top: 40px;
-  }
-  #resumo-final {
-    margin-top: 35px;
-    border-top: 1px solid #888;
-    padding-top: 30px;
-    max-height: 60vh;
-    overflow-y: auto;
-  }
-  .resumo-pergunta {
-    margin-bottom: 30px;
-  }
-  .resumo-pergunta h3 {
-    font-weight: 600;
-    font-size: 1.2rem;
-    margin-bottom: 8px;
-  }
-  .alternativa-resumo {
-    margin-left: 20px;
-    margin-bottom: 6px;
-    font-size: 1.05rem;
-  }
-  .correta {
-    font-weight: 700;
+  .feedback.correct {
     color: #0b610b;
   }
-  .errada {
-    font-weight: 700;
+  .feedback.wrong {
     color: #a80000;
   }
+
   .explicacao {
-    margin-left: 20px;
     font-style: italic;
-    font-size: 0.95rem;
-    color: #444;
+    font-size: 1rem;
+    color: #8899ffcc;
+    margin-top: 0.3rem;
+    user-select: text;
   }
-  footer {
-    margin-top: 30px;
-    font-size: 0.9rem;
-    color: #666;
+
+  /* Botões */
+  .botoes {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  button {
+    background: linear-gradient(45deg, #556bff, #00c6ff, #ff00d4);
+    background-size: 300% 300%;
+    animation: gradientMove 5s ease infinite;
+    border: none;
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 14px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(85, 107, 255, 0.6);
+    transition: background-position 0.4s ease;
+    user-select: none;
+  }
+
+  button:disabled {
+    background: #44475a;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+
+  button:hover:not(:disabled),
+  button:focus-visible:not(:disabled) {
+    background-position: 100% 50%;
+    outline: none;
+  }
+
+  /* Botão toggle dark/light */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 28px;
+    margin-bottom: 20px;
+    align-self: flex-end;
+  }
+
+  .switch input { display: none; }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(45deg, #556bff, #00c6ff, #ff00d4);
+    background-size: 300% 300%;
+    animation: gradientMove 5s ease infinite;
+    transition: 0.4s;
+    border-radius: 34px;
+    box-shadow: 0 0 10px rgba(85, 107, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    user-select: none;
+  }
+
+  input:checked + .slider {
+    background: linear-gradient(45deg, #111, #333, #000);
+    background-size: 300% 300%;
+    animation: gradientMove 6s ease infinite;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    z-index: 2;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+
+  .icon {
+    font-size: 14px;
+    z-index: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .sun { opacity: 1; }
+  .moon { opacity: 0; }
+
+  input:checked + .slider .sun { opacity: 0; }
+  input:checked + .slider .moon { opacity: 1; }
+
+  /* Modo claro */
+  #revisao.light-mode {
+    background: #f0f4ff;
+    color: #1a1a1a;
+    animation: none;
+    box-shadow: 0 10px 35px rgb(100 120 170 / 0.3);
+  }
+
+  #revisao.light-mode::before {
+    background: none;
+    animation: none;
+  }
+
+  #revisao.light-mode .feedback.correct {
+    color: #0b610b;
+  }
+
+  #revisao.light-mode .feedback.wrong {
+    color: #a80000;
+  }
+
+  /* Resumo final */
+  #resumoFinal {
+    max-height: 75vh;
+    overflow-y: auto;
+  }
+
+  #resumoFinal h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #8899ff;
+    user-select: none;
+  }
+
+  #resumoFinal ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  #resumoFinal li {
+    background: rgba(70, 70, 110, 0.4);
+    margin-bottom: 12px;
+    padding: 12px 18px;
+    border-radius: 12px;
+  }
+
+  #resumoFinal li.correct {
+    border-left: 6px solid #0b610b;
+  }
+
+  #resumoFinal li.wrong {
+    border-left: 6px solid #a80000;
+  }
+
+  #resumoFinal li .pergunta {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  #resumoFinal li .resposta-usuario {
+    margin-top: 6px;
+  }
+
+  #resumoFinal li .correta {
+    margin-top: 4px;
     font-style: italic;
+    color: #d0d0ffcc;
+  }
+
+  #resumoFinal li .explicacao {
+    margin-top: 6px;
+    font-style: italic;
+    color: #ffbaba;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 </style>
+
 </head>
 <body>
-<div id="app">
-  <div id="start-screen">
-    <h1>Revisão-AV2-Geografia-2º-Trimestre</h1>
-    <button id="start-btn">Iniciar Revisão</button>
+
+<section id="revisao" tabindex="0" aria-label="Seção de Revisão de Inglês">
+
+  <label class="switch" aria-label="Alternar modo claro e escuro">
+    <input type="checkbox" id="toggleTemaRevisao" aria-checked="false" role="switch" />
+    <span class="slider" aria-hidden="true">
+      <span class="icon sun" aria-hidden="true">☀️</span>
+      <span class="icon moon" aria-hidden="true">🌙</span>
+    </span>
+  </label>
+
+  <h2><i class="fas fa-clipboard-list"></i> Revisão de Inglês</h2>
+
+  <div class="pergunta-container" id="pergunta" aria-live="polite"></div>
+
+  <form id="formAlternativas" class="alternatives" aria-labelledby="pergunta"></form>
+
+  <div class="botoes">
+    <button id="btnAnterior" aria-label="Pergunta anterior" disabled>Anterior</button>
+    <button id="btnProximo" aria-label="Próxima pergunta" disabled>Próximo</button>
   </div>
 
-  <div id="quiz-screen" style="display:none;">
-    <div class="question" id="question-text"></div>
-    <form id="alternatives-form" class="alternatives"></form>
-    <div id="resposta"></div>
-    <button id="submit-btn" disabled>Responder</button>
-  </div>
-
-  <div id="result-screen" style="display:none;">
-    <h1>Resultado da Revisão</h1>
-    <div id="pontuacao"></div>
-    <div id="resumo-final"></div>
-    <button id="restart-btn">Refazer Revisão</button>
-  </div>
-</div>
-
-<footer>
-  © 2025 João Miranda. Todos os direitos reservados.
-</footer>
+</section>
 
 <script>
+  // Array original de perguntas
   const perguntasOriginais = [
     {
-      pergunta: "Change the verb to Simple Past (regular verb):\nI (play) soccer yesterday.",
-      alternativas: [
-        "play",
-        "plays",
-        "played",
-        "playing"
-      ],
+      pergunta: "Change the verb to Simple Past (regular verb): I (play) soccer yesterday.",
+      alternativas: ["play", "plays", "played", "playing"],
       correta: 2,
-      explicacao: "O verbo correto no Simple Past é 'played', que é o passado regular de 'play'."
+      explicacao: "O verbo regular no passado simples termina com -ed: 'played' é a forma correta."
     },
     {
-      pergunta: "Change the verb to Simple Past (regular verb):\nThey (visit) the museum last Saturday.",
-      alternativas: [
-        "visits",
-        "visited",
-        "visit",
-        "visiting"
-      ],
+      pergunta: "Change the verb to Simple Past (regular verb): They (visit) the museum last Saturday.",
+      alternativas: ["visits", "visited", "visit", "visiting"],
       correta: 1,
-      explicacao: "'Visited' é o passado regular de 'visit', usado para ações concluídas no passado."
+      explicacao: "O verbo regular no passado simples é 'visited'."
     },
     {
-      pergunta: "Change the verb to Simple Past (irregular verb):\nShe (go) to the park last Sunday.",
-      alternativas: [
-        "goed",
-        "goes",
-        "went",
-        "going"
-      ],
+      pergunta: "Change the verb to Simple Past (irregular verb): She (go) to the park last Sunday.",
+      alternativas: ["goed", "goes", "went", "going"],
       correta: 2,
-      explicacao: "'Went' é o passado irregular do verbo 'go'."
+      explicacao: "'Went' é a forma correta no passado do verbo irregular 'go'."
     },
     {
-      pergunta: "Change the verb to Simple Past (irregular verb):\nWe (have) a picnic yesterday afternoon.",
-      alternativas: [
-        "haved",
-        "have",
-        "had",
-        "having"
-      ],
+      pergunta: "Change the verb to Simple Past (irregular verb): We (have) a picnic yesterday afternoon.",
+      alternativas: ["haved", "have", "had", "having"],
       correta: 2,
       explicacao: "'Had' é o passado irregular do verbo 'have'."
     },
     {
-      pergunta: "Complete with There is or There are:\n___ a bottle on the table.",
-      alternativas: [
-        "There are",
-        "There is",
-        "There’s many",
-        "There’re"
-      ],
+      pergunta: "Complete with There is or There are: ___ a bottle on the table.",
+      alternativas: ["There are", "There is", "There’s many", "There’re"],
       correta: 1,
-      explicacao: "'There is' é usado para indicar existência no singular, como 'a bottle'."
+      explicacao: "'There is' é usado para singular: 'a bottle'."
     },
     {
-      pergunta: "Complete with There is or There are:\n___ some toys in the box.",
-      alternativas: [
-        "There is",
-        "There are",
-        "There’s",
-        "There’s some"
-      ],
+      pergunta: "Complete with There is or There are: ___ some toys in the box.",
+      alternativas: ["There is", "There are", "There’s", "There’s some"],
       correta: 1,
-      explicacao: "'There are' é usado para indicar existência no plural, como 'some toys'."
+      explicacao: "'There are' é usado para plural: 'some toys'."
     },
     {
-      pergunta: "Complete with much, many, a little or a few:\nThere are ___ apples in the basket.",
-      alternativas: [
-        "much",
-        "many",
-        "a little",
-        "a few"
-      ],
+      pergunta: "Complete with much, many, a little or a few: There are ___ apples in the basket.",
+      alternativas: ["much", "many", "a little", "a few"],
       correta: 1,
-      explicacao: "'Many' é usado para contáveis no plural, como 'apples'."
+      explicacao: "'Many' é usado para substantivos contáveis no plural."
     },
     {
-      pergunta: "Choose the correct preposition:\nI always wake up ___ 7 a.m.",
-      alternativas: [
-        "in",
-        "on",
-        "at",
-        "from"
-      ],
+      pergunta: "Choose the correct preposition: I always wake up ___ 7 a.m.",
+      alternativas: ["in", "on", "at", "from"],
       correta: 2,
-      explicacao: "'At' é a preposição correta para horas específicas."
+      explicacao: "'At' é usado para horas exatas."
     },
     {
-      pergunta: "Choose the correct preposition:\nMy birthday is ___ May.",
-      alternativas: [
-        "in",
-        "on",
-        "at",
-        "to"
-      ],
+      pergunta: "Choose the correct preposition: My birthday is ___ May.",
+      alternativas: ["in", "on", "at", "to"],
       correta: 0,
       explicacao: "'In' é usado para meses."
     },
     {
-      pergunta: "Complete with the correct article:\nSusan is ___ intelligent girl.",
-      alternativas: [
-        "a",
-        "an",
-        "the",
-        "no article"
-      ],
+      pergunta: "Complete with the correct article: Susan is ___ intelligent girl.",
+      alternativas: ["a", "an", "the", "no article"],
       correta: 1,
-      explicacao: "'An' é usado antes de palavras que começam com som de vogal, como 'intelligent'."
+      explicacao: "'An' é usado antes de palavra que começa com som de vogal."
     }
   ];
 
-  function shuffleArray(array) {
+  // Função para embaralhar array (Fisher-Yates)
+  function embaralharArray(array) {
     for (let i = array.length -1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i+1));
+      const j = Math.floor(Math.random() * (i +1));
       [array[i], array[j]] = [array[j], array[i]];
     }
-    return array;
   }
 
-  let perguntasEmbaralhadas = [];
-  let atual = 0;
-  let pontos = 0;
-  const respostasDadas = [];
+  let perguntas = [];
+  let indiceAtual = 0;
+  let respostasUsuario = [];
 
-  function prepararQuiz() {
-    perguntasEmbaralhadas = shuffleArray(perguntasOriginais.map(p => {
-      let alternativasComIndice = p.alternativas.map((alt, i) => ({texto: alt, indice: i}));
-      alternativasComIndice = shuffleArray(alternativasComIndice);
-      const novaCorreta = alternativasComIndice.findIndex(a => a.indice === p.correta);
-      return {
-        pergunta: p.pergunta,
-        alternativas: alternativasComIndice.map(a => a.texto),
-        correta: novaCorreta,
-        explicacao: p.explicacao
-      };
-    }));
-    atual = 0;
-    pontos = 0;
-    respostasDadas.length = 0;
+  // Inicializa perguntas embaralhadas e alternativas embaralhadas
+  function inicializarPerguntasEmbaralhadas() {
+    perguntas = JSON.parse(JSON.stringify(perguntasOriginais)); // clone profundo
+    embaralharArray(perguntas);
+
+    perguntas.forEach(p => {
+      const corretaTexto = p.alternativas[p.correta];
+      embaralharArray(p.alternativas);
+      p.correta = p.alternativas.indexOf(corretaTexto);
+    });
   }
 
-  const startScreen = document.getElementById("start-screen");
-  const quizScreen = document.getElementById("quiz-screen");
-  const resultScreen = document.getElementById("result-screen");
-  const questionText = document.getElementById("question-text");
-  const alternativesForm = document.getElementById("alternatives-form");
-  const respostaDiv = document.getElementById("resposta");
-  const submitBtn = document.getElementById("submit-btn");
-  const pontuacaoDiv = document.getElementById("pontuacao");
-  const resumoFinalDiv = document.getElementById("resumo-final");
-  const startBtn = document.getElementById("start-btn");
-  const restartBtn = document.getElementById("restart-btn");
+  // Carrega pergunta atual
+  const perguntaEl = document.getElementById('pergunta');
+  const formAlternativas = document.getElementById('formAlternativas');
+  const btnAnterior = document.getElementById('btnAnterior');
+  const btnProximo = document.getElementById('btnProximo');
+  const revisao = document.getElementById('revisao');
+  const toggleTemaRevisao = document.getElementById('toggleTemaRevisao');
 
-  startBtn.onclick = () => {
-    prepararQuiz();
-    startScreen.style.display = "none";
-    resultScreen.style.display = "none";
-    quizScreen.style.display = "block";
-    mostrarPergunta();
-  };
+  function carregarPergunta() {
+    const atual = perguntas[indiceAtual];
+    perguntaEl.textContent = `Pergunta ${indiceAtual + 1} de ${perguntas.length}: ${atual.pergunta}`;
 
-  restartBtn.onclick = () => {
-    prepararQuiz();
-    resultScreen.style.display = "none";
-    quizScreen.style.display = "block";
-    mostrarPergunta();
-  };
+    formAlternativas.innerHTML = '';
 
-  function mostrarPergunta() {
-    respostaDiv.textContent = "";
-    submitBtn.disabled = true;
-    const p = perguntasEmbaralhadas[atual];
-    questionText.textContent = `(${atual + 1}/${perguntasEmbaralhadas.length}) ${p.pergunta}`;
-    alternativesForm.innerHTML = "";
+    atual.alternativas.forEach((alt, i) => {
+      const id = `alt-${i}`;
+      const label = document.createElement('label');
+      label.className = 'alt-label';
+      label.setAttribute('for', id);
+      label.tabIndex = 0;
 
-    p.alternativas.forEach((alt, i) => {
-      const id = `alt${i}`;
-      const label = document.createElement("label");
-      label.setAttribute("for", id);
-      label.className = "alternativa";
-
-      const input = document.createElement("input");
-      input.type = "radio";
-      input.name = "alternativa";
+      const input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'alternativa';
       input.id = id;
       input.value = i;
-
-      input.onclick = () => {
-        submitBtn.disabled = false;
-        respostaDiv.textContent = "";
-      };
+      input.checked = (respostasUsuario[indiceAtual] === i);
+      input.required = true;
 
       label.appendChild(input);
       label.appendChild(document.createTextNode(alt));
-      alternativesForm.appendChild(label);
+
+      formAlternativas.appendChild(label);
     });
+
+    btnAnterior.disabled = (indiceAtual === 0);
+    btnProximo.disabled = (respostasUsuario[indiceAtual] === null);
+
+    // Foca no primeiro input para acessibilidade
+    const firstInput = formAlternativas.querySelector('input');
+    if (firstInput) firstInput.focus();
   }
 
-  submitBtn.onclick = () => {
-    const p = perguntasEmbaralhadas[atual];
-    const selecionado = alternativesForm.alternativa.value;
-    if (selecionado === undefined) return;
-    const selecionadoNum = parseInt(selecionado, 10);
-    const acertou = selecionadoNum === p.correta;
-    if (acertou) pontos++;
-    respostasDadas[atual] = selecionadoNum;
-
-    atual++;
-    if (atual >= perguntasEmbaralhadas.length) {
-      mostrarResultado();
-    } else {
-      mostrarPergunta();
+  // Evento de seleção da alternativa
+  formAlternativas.addEventListener('change', (e) => {
+    if (e.target.name === 'alternativa') {
+      respostasUsuario[indiceAtual] = Number(e.target.value);
+      btnProximo.disabled = false;
     }
-  };
+  });
 
-  function mostrarResultado() {
-    quizScreen.style.display = "none";
-    resultScreen.style.display = "block";
+  btnAnterior.addEventListener('click', () => {
+    if (indiceAtual > 0) {
+      indiceAtual--;
+      carregarPergunta();
+      btnProximo.disabled = (respostasUsuario[indiceAtual] === null);
+    }
+  });
 
-    const nota = ((pontos / perguntasEmbaralhadas.length) * 10).toFixed(2);
-    pontuacaoDiv.textContent = `Sua nota: ${nota} / 10`;
+  btnProximo.addEventListener('click', () => {
+    if (respostasUsuario[indiceAtual] === null) {
+      alert('Por favor, escolha uma alternativa para continuar.');
+      return;
+    }
+    if (indiceAtual < perguntas.length - 1) {
+      indiceAtual++;
+      carregarPergunta();
+      btnProximo.disabled = (respostasUsuario[indiceAtual] === null);
+    } else {
+      mostrarResultadoFinal();
+    }
+  });
 
-    resumoFinalDiv.innerHTML = "";
-    perguntasEmbaralhadas.forEach((p, i) => {
-      const div = document.createElement("div");
-      div.className = "resumo-pergunta";
+  function mostrarResultadoFinal() {
+    perguntaEl.style.display = 'none';
+    formAlternativas.style.display = 'none';
+    btnAnterior.style.display = 'none';
+    btnProximo.style.display = 'none';
 
-      const h3 = document.createElement("h3");
-      h3.textContent = `Q${i + 1}: ${p.pergunta}`;
-      div.appendChild(h3);
-
-      p.alternativas.forEach((alt, idx) => {
-        const span = document.createElement("div");
-        span.className = "alternativa-resumo";
-        if (idx === p.correta) {
-          span.classList.add("correta");
-          span.textContent = `✔ ${alt}`;
-        } else if (idx === respostasDadas[i]) {
-          span.classList.add("errada");
-          span.textContent = `✖ ${alt}`;
-        } else {
-          span.textContent = alt;
-        }
-        div.appendChild(span);
-      });
-
-      const exp = document.createElement("div");
-      exp.className = "explicacao";
-      exp.textContent = `Explicação: ${p.explicacao}`;
-      div.appendChild(exp);
-
-      resumoFinalDiv.appendChild(div);
+    let acertos = 0;
+    perguntas.forEach((p, i) => {
+      if (respostasUsuario[i] === p.correta) acertos++;
     });
+    const nota = (acertos / perguntas.length) * 10;
+
+    const resumoDiv = document.createElement('div');
+    resumoDiv.id = 'resumoFinal';
+
+    const notaEl = document.createElement('div');
+    notaEl.id = 'notaFinal';
+    notaEl.style.fontSize = '1.7rem';
+    notaEl.style.fontWeight = '700';
+    notaEl.style.marginBottom = '1rem';
+    notaEl.style.userSelect = 'none';
+    notaEl.textContent = `Sua nota final: ${nota.toFixed(1)} / 10 (${acertos} de ${perguntas.length} acertos)`;
+    resumoDiv.appendChild(notaEl);
+
+    const resumoTitulo = document.createElement('h3');
+    resumoTitulo.textContent = 'Resumo das respostas:';
+    resumoDiv.appendChild(resumoTitulo);
+
+    const lista = document.createElement('ul');
+
+    perguntas.forEach((p, i) => {
+      const item = document.createElement('li');
+      const acertou = respostasUsuario[i] === p.correta;
+      item.className = acertou ? 'correct' : 'wrong';
+
+      const perguntaTexto = document.createElement('div');
+      perguntaTexto.className = 'pergunta';
+      perguntaTexto.textContent = `Q${i + 1}: ${p.pergunta}`;
+      item.appendChild(perguntaTexto);
+
+      const respostaUsuarioTxt = p.alternativas[respostasUsuario[i]] ?? "Sem resposta";
+      const respostaUsuario = document.createElement('div');
+      respostaUsuario.className = 'resposta-usuario';
+      respostaUsuario.textContent = `Sua resposta: ${respostaUsuarioTxt}`;
+      item.appendChild(respostaUsuario);
+
+      const respostaCorreta = document.createElement('div');
+      respostaCorreta.className = 'correta';
+      respostaCorreta.textContent = `Resposta correta: ${p.alternativas[p.correta]}`;
+      item.appendChild(respostaCorreta);
+
+      const explicacao = document.createElement('div');
+      explicacao.className = 'explicacao';
+      explicacao.textContent = p.explicacao;
+      item.appendChild(explicacao);
+
+      lista.appendChild(item);
+    });
+
+    resumoDiv.appendChild(lista);
+
+    // Botão refazer
+    const btnRefazer = document.createElement('button');
+    btnRefazer.textContent = 'Refazer Revisão';
+    btnRefazer.style.marginTop = '1.8rem';
+    btnRefazer.style.padding = '14px 32px';
+    btnRefazer.style.fontSize = '1.2rem';
+    btnRefazer.style.fontWeight = '700';
+    btnRefazer.style.borderRadius = '18px';
+    btnRefazer.style.color = '#fff';
+    btnRefazer.style.background = 'linear-gradient(45deg, #ff0080, #7928ca)';
+    btnRefazer.style.cursor = 'pointer';
+    btnRefazer.style.boxShadow = '0 6px 15px rgba(255, 0, 128, 0.8)';
+    btnRefazer.addEventListener('click', () => {
+      inicializarPerguntasEmbaralhadas();
+      resetarQuiz();
+    });
+
+    resumoDiv.appendChild(btnRefazer);
+
+    revisao.appendChild(resumoDiv);
+    revisao.focus();
   }
+
+  // Função para resetar o quiz para o início
+  function resetarQuiz() {
+    respostasUsuario = Array(perguntas.length).fill(null);
+    indiceAtual = 0;
+
+    const resumoDiv = document.getElementById('resumoFinal');
+    if (resumoDiv) resumoDiv.remove();
+
+    perguntaEl.style.display = '';
+    formAlternativas.style.display = '';
+    btnAnterior.style.display = '';
+    btnProximo.style.display = '';
+
+    carregarPergunta();
+    btnProximo.disabled = true;
+  }
+
+  // Toggle tema claro/escuro
+  toggleTemaRevisao.addEventListener('change', () => {
+    if (toggleTemaRevisao.checked) {
+      revisao.classList.add('light-mode');
+      localStorage.setItem('temaRevisao', 'claro');
+      toggleTemaRevisao.setAttribute('aria-checked', 'true');
+    } else {
+      revisao.classList.remove('light-mode');
+      localStorage.setItem('temaRevisao', 'escuro');
+      toggleTemaRevisao.setAttribute('aria-checked', 'false');
+    }
+  });
+
+  // Carregar tema salvo
+  function carregarTema() {
+    const tema = localStorage.getItem('temaRevisao');
+    if (tema === 'claro') {
+      revisao.classList.add('light-mode');
+      toggleTemaRevisao.checked = true;
+      toggleTemaRevisao.setAttribute('aria-checked', 'true');
+    } else {
+      revisao.classList.remove('light-mode');
+      toggleTemaRevisao.checked = false;
+      toggleTemaRevisao.setAttribute('aria-checked', 'false');
+    }
+  }
+
+  // Inicialização
+  carregarTema();
+  inicializarPerguntasEmbaralhadas();
+  resetarQuiz();
+
 </script>
+
 </body>
 </html>
